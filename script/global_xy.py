@@ -3,7 +3,6 @@ import pandas as pd
 import math
 import json
 
-df = pd.read_table('nldd_classe.tsv')
 
 radius = 6371
 
@@ -19,22 +18,63 @@ class referencePoint:
 p0 = referencePoint(0, 0, 45.590231380357075, -73.68553872266351)
 # Calculate global X and Y for bottom-right reference point
 p1 = referencePoint(2244, 2060, 45.55443164693175, -73.59927931059248)
-
-
-# def getScreenXY(pos_x,pos_y):
     
-#     p0_pos_ref = latlngToGlobalXY(p0.lat,p0.lng)
 
-#     p1_pos_ref = latlngToGlobalXY(p1.lat,p1.lng)
+def main():
 
-#     perX = ((pos_x-p0_pos_ref['x'])/(p1_pos_ref['x'] -p0_pos_ref['x'] ))
+   createJSONfile('../data/ll/hans_01.tsv','../data/screen/hans_01.json')
+   createJSONfile('../data/ll/hans_02.tsv','../data/screen/hans_02.json')
+   createJSONfile('../data/ll/lagrandeporte.tsv','../data/screen/lagrandeporte.json')
+   createJSONfile('../data/ll/mylene.tsv','../data/screen/mylene.json')
 
-#     perY = ((pos_y-p0_pos_ref['y'])/(p1_pos_ref['y'] -p0_pos_ref['y'] ))
+    
 
-#     screen_x = p0.scrX + (p1.scrX - p0.scrX)*perX
-#     screen_y = p0.scrY + (p1.scrY - p0.scrY)*perY
+def createJSONfile(input,output):
 
-#     return {'x': screen_x/10, 'y': screen_y/10}
+    df = pd.read_table(input)
+
+
+    all_pos = latlngToGlobalXY(df["latitude"],df["longitude"])
+
+    global_x =all_pos['x'].to_numpy()
+    global_y =all_pos['y'].to_numpy()
+
+    df['global_x'] = global_x
+    df['global_y'] = global_y
+
+    dict = {} 
+
+    dict['x'] = getAllScreenX(global_x)
+
+    dict['y'] = getAllScreenY(global_y)
+
+
+    # use json.dump to write the file
+    with open(output, 'w') as file:
+        json.dump(dict, file, indent=4)
+
+
+
+def getAllScreenX(global_x):
+
+    all_screen_x = []
+
+    for i in range(0,len(global_x)):
+
+        all_screen_x.append(getScreenX(global_x[i]))
+
+    return all_screen_x
+
+        
+def getAllScreenY(global_y):
+
+    all_screen_y = []
+
+    for i in range(0,len(global_y)):
+
+        all_screen_y.append(getScreenY(global_y[i]))
+
+    return all_screen_y
 
 def getScreenX(pos_x):
 
@@ -49,40 +89,21 @@ def getScreenX(pos_x):
     return screen_x/10
 
 
-    
+def getScreenY(pos_y):
 
-def main():
+    p0_pos_ref = latlngToGlobalXY(p0.lat,p0.lng)
 
-    all_pos = latlngToGlobalXY(df["latitude"],df["longitude"])
+    p1_pos_ref = latlngToGlobalXY(p1.lat,p1.lng)
 
-    global_x =all_pos['x'].to_numpy()
-    global_y =all_pos['y'].to_numpy()
+    perY = ((pos_y-p0_pos_ref['y'])/(p1_pos_ref['y'] -p0_pos_ref['y'] ))
 
-    df['global_x'] = global_x
-    df['global_y'] = global_y
+    screen_y = p0.scrY + (p1.scrY - p0.scrY)*perY
 
-    dict = getAllScreenXY(global_x,global_y)
-
-    # use json.dump to write the file
-    with open('./screenXY.json', 'w') as file:
-        json.dump(dict, file, indent=4)
-
+    return screen_y/10
     
 
 
-def getAllScreenXY(global_x,global_y):
 
-    dict = {}
-
-    for i in range(0,len(global_x)):
-
-        index = 'point' + str(i)
-
-        test = getScreenXY(global_x[i],global_y[i])
-
-        dict[index] = test
-
-    return dict
 
 # This function converts lat and lng coordinates to GLOBAL X and Y positions
 def latlngToGlobalXY(lat, lng):

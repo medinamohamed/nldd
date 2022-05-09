@@ -1,3 +1,4 @@
+from fileinput import filename
 import urls
 import sys
 import pandas as pd
@@ -6,15 +7,17 @@ from urllib.parse import urlsplit, parse_qs
 
 def main():
 
-    url_classe = urls.classe
+    mylene = urls.mylene
+    hans_01 = urls.hans_01
+    lagrandeporte = urls.lagrandeporte
+    hans_02 = urls.hans_02
 
-    lat_arr = get_lat(url_classe)
+    create_csv(mylene,'../data/ll/mylene.tsv')
+    create_csv(hans_01,'../data/ll/hans_01.tsv')
+    create_csv(lagrandeporte,'../data/ll/lagrandeporte.tsv')
+    create_csv(hans_02,'../data/ll/hans_02.tsv')
 
-    lng_arr = get_lng(url_classe)
-
-    create_csv(lng_arr,lat_arr)
-
-def getll(url):
+def get_ll(url):
     
     query = urlsplit(url).query
     params = parse_qs(query)
@@ -29,7 +32,7 @@ def get_lat(url):
     lat_arr = []
     for i in url:
    
-        lat_arr.append(getll(i)['lat'])
+        lat_arr.append(get_ll(i)['lat'])
 
     return lat_arr
 
@@ -38,16 +41,20 @@ def get_lng(url):
     lng_arr = []
     for i in url:
     
-        lng_arr.append(getll(i)['lng'])
+        lng_arr.append(get_ll(i)['lng'])
 
     return lng_arr
 
-def create_csv(lng_arr,lat_arr):
+def create_csv(classe,filename):
+
+    lat_arr = get_lat(classe)
+
+    lng_arr = get_lng(classe)
 
     data = {'latitude':lng_arr, 'longitude':lat_arr }
     df = pd.DataFrame(data)
 
-    df.to_csv(f"nldd_classe.tsv", sep = '\t')
+    df.to_csv(filename , sep = '\t')
 
 
 

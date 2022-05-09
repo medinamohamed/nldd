@@ -1,14 +1,18 @@
 const menuBtn = document.querySelector('.menu-btn');
 let menuOpen = false;
 const div = document.getElementById('classe');
+div.classList.add("to-hide");
+
 menuBtn.addEventListener('click', ()=> {
     if(!menuOpen){
         div.classList.add("to-hide");
-        menuBtn.classList.add('open');
+        menuBtn.classList.remove('open');
+        
         menuOpen = true;
     } else{
-        menuBtn.classList.remove('open');
         div.classList.remove('to-hide');
+
+        menuBtn.classList.add('open');
         menuOpen = false;
     }
 });

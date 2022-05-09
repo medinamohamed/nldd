@@ -14,18 +14,30 @@ class referencePoint:
         self.lng = lng
 
 
+# #OG
+# # Calculate global X and Y for top-left reference point        
+# p0 = referencePoint(0, 0, 45.590231380357075, -73.68553872266351)
+# # Calculate global X and Y for bottom-right reference point
+# p1 = referencePoint(2244, 2060, 45.55443164693175, -73.59927931059248)
+
+#Hans 01
 # Calculate global X and Y for top-left reference point        
-p0 = referencePoint(0, 0, 45.590231380357075, -73.68553872266351)
+p0 = referencePoint(0, 0, 45.539331378437865,-73.63052177398752)
 # Calculate global X and Y for bottom-right reference point
-p1 = referencePoint(2244, 2060, 45.55443164693175, -73.59927931059248)
+p1 = referencePoint(2500, 2060, 45.53680249344822, -73.62632611191616)
+
+# Calculate global X and Y for top-left reference point        
+p0 = referencePoint(0, 0, 45.539331378437865,-73.63052177398752)
+# Calculate global X and Y for bottom-right reference point
+p1 = referencePoint(2500, 2060, 45.53680249344822, -73.62632611191616)
     
 
 def main():
 
    createJSONfile('../data/ll/hans_01.tsv','../data/screen/hans_01.json')
-   createJSONfile('../data/ll/hans_02.tsv','../data/screen/hans_02.json')
-   createJSONfile('../data/ll/lagrandeporte.tsv','../data/screen/lagrandeporte.json')
-   createJSONfile('../data/ll/mylene.tsv','../data/screen/mylene.json')
+#    createJSONfile('../data/ll/hans_02.tsv','../data/screen/hans_02.json')
+#    createJSONfile('../data/ll/lagrandeporte.tsv','../data/screen/lagrandeporte.json')
+#    createJSONfile('../data/ll/mylene.tsv','../data/screen/mylene.json')
 
     
 

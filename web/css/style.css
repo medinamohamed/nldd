@@ -1,19 +1,23 @@
 html,
 body {
+
+    background: linear-gradient(#E9FCD9, white);
+    margin: 0;
+    padding: 0;
     height: 100%;
 }
 
 body {
 
-    background: linear-gradient(#E9FCD9, white);
-    margin: 0;
-    display: flex;
+    /* background: linear-gradient(#E9FCD9, white);
+    margin: 0; */
+    /* display: flex; */
 
     /* This centers our sketch horizontally. */
-    justify-content: center;
+    /* justify-content: center; */
 
     /* This centers our sketch vertically. */
-    align-items: center;
+    /* align-items: center; */
 }
 
 .classe {
@@ -25,16 +29,25 @@ body {
 
     margin: 0;
 
+    position: fixed;
+
     justify-content: space-around;
 
-
-
+    /* set position */
+    top: 150px;
+    right: 30px;
 
 
 }
 
+header {
+    margin: 2.5%;
+    display: flex;
+    justify-content: space-between;
+}
+
 h1 {
-    padding: 2em 0em;
+    padding: 0em 0em;
     text-transform: uppercase;
     font-family: 'Roboto', sans-serif;
     font-size: 1.75em;
@@ -45,6 +58,7 @@ h1 {
 
 button {
     display: inline-block;
+    background-color: transparent;
     padding: 0.5em 2em;
     border: 0.16em solid #61AA0E;
     margin: 0 2em 3em 0;
@@ -61,6 +75,7 @@ button {
     width: 15em;
 }
 
+/* 
 button:hover {
     color: #DDDDDD;
     border-color: #DDDDDD;
@@ -69,10 +84,10 @@ button:hover {
 button:active {
     color: #BBBBBB;
     border-color: #BBBBBB;
-}
+} */
 
 .active:active {
-    color: red;
+    color: #BBBBBB;
 }
 
 @media all and (max-width:30em) {
@@ -99,9 +114,9 @@ button:active {
 .menu-btn__burger {
     width: 50px;
     height: 6px;
-    background: #fff;
+    background: #61AA0E;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(255, 101, 47, .2);
+    box-shadow: 0 2px 5px #E9FCD9;
     transition: all .5s ease-in-out;
 }
 
@@ -111,9 +126,9 @@ button:active {
     position: absolute;
     width: 50px;
     height: 6px;
-    background: #fff;
+    background: #61AA0E;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(255, 101, 47, .2);
+    box-shadow: 0 2px 5px #E9FCD9;
     transition: all .5s ease-in-out;
 }
 
@@ -145,3 +160,5 @@ button:active {
     visibility: hidden;
     transition: all 0.2s all;
 }
+
+/*************************************************/

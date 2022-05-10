@@ -1,4 +1,7 @@
+let doubleScreenX = [];
+let doubleScreenY = [];
 
+let n = 2;
 function preload(){
 
   screenXY =  loadJSON('../data/archive/screen/mylene.json')
@@ -6,32 +9,41 @@ function preload(){
 }
 function setup() {
   
-  var canvas = createCanvas(1000, 500);
+  var canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('canvasForHTML');
 
   console.log(screenXY);
 
   frameRate(0.75);
+
+ 
+  for (let i=0 ; i<screenXY.x.length; i++){
+    doubleScreenX.push(screenXY.x[i]*n)
+  }
+
+ 
+  for (let i=0 ; i<screenXY.x.length; i++){
+    doubleScreenY.push(screenXY.y[i]*n)
+  }
+
   
 
 }
 
 function draw() {
-
-  translate(550, 75);
+  translate(350, 0);
 
   stroke('#61AA0E'); // Change the color
   strokeWeight(4); // Make the points 10 pixels 
 
- 
-  for (let i=1 ; i<screenXY.x.length; i++){
-    point(screenXY.x[i], screenXY.y[i])
+
+  for (let i=1 ; i<screenXY.y.length; i++){
+    point(doubleScreenX[i], doubleScreenY[i])
   }
-
   
-  let shuffleScreenXY = shuffleXY(screenXY.x,screenXY.y)
 
-  line(screenXY.x[frameCount], screenXY.y[frameCount], screenXY.x[frameCount+1], screenXY.y[frameCount+1])
+  line(doubleScreenX[frameCount], doubleScreenY[frameCount], doubleScreenX[frameCount+1], doubleScreenY[frameCount+1])
+  // let shuffleScreenXY = shuffleXY(screenXY.x,screenXY.y)
 
 
 

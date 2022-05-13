@@ -14,8 +14,9 @@ function setup() {
 
   console.log(screenXY);
 
-  frameRate(0.75);
+  frameRate(1);
 
+  console.log(screenXY.x.length)
  
   for (let i=0 ; i<screenXY.x.length; i++){
     doubleScreenX.push(screenXY.x[i]*n)
@@ -25,8 +26,6 @@ function setup() {
   for (let i=0 ; i<screenXY.x.length; i++){
     doubleScreenY.push(screenXY.y[i]*n)
   }
-
-  
 
 }
 
@@ -41,14 +40,14 @@ function draw() {
     point(doubleScreenX[i], doubleScreenY[i])
   }
   
-
   line(doubleScreenX[frameCount], doubleScreenY[frameCount], doubleScreenX[frameCount+1], doubleScreenY[frameCount+1])
   // let shuffleScreenXY = shuffleXY(screenXY.x,screenXY.y)
 
-
-
 }
 
+function mousePressed() {
+  redraw();
+}
 
 function shuffleXY(arrayX, arrayY) {
   var copyX = [], copyY = [], n = arrayX.length, i;

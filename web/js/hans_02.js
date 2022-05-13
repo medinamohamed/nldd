@@ -12,12 +12,8 @@ function setup() {
   var canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('canvasForHTML');
 
-  console.log(screenXY);
+  frameRate(1);
 
-  frameRate(0.75);
-
-
- 
   for (let i=0 ; i<screenXY.x.length; i++){
     doubleScreenX.push(screenXY.x[i]*n)
   }
@@ -33,7 +29,7 @@ function setup() {
 
 function draw() {
 
-  translate(350, -100);
+  translate(350, -140);
 
   stroke('#61AA0E'); // Change the color
   strokeWeight(4); // Make the points 10 pixels 
@@ -43,11 +39,9 @@ function draw() {
     point(doubleScreenX[i], doubleScreenY[i])
   }
   
-
   line(doubleScreenX[frameCount], doubleScreenY[frameCount], doubleScreenX[frameCount+1], doubleScreenY[frameCount+1])
 
   let shuffleScreenXY = shuffleXY(screenXY.x,screenXY.y)
-
 
 }
 
